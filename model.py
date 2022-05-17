@@ -12,7 +12,7 @@ class Item(db.Model):
     item_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     item_type = db.Column(db.String(100), nullable=False)
     item_name = db.Column(db.String(100), nullable=False)
-    quantity = db.db.Column(db.Integer, default=0)
+    quantity = db.Column(db.Integer, default=0)
     owner_id = db.Column(db.Integer, db.ForeignKey("owner.owner_id"), nullable=False)
     
     owner = db.relationship("Owner", back_populates="items")
@@ -31,7 +31,6 @@ class Owner(db.Model):
 
     owner_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     owner_name = db.Column(db.String(100), nullable=False)
-    registered_number = db.Column(db.String(100), nullable=False)
     
     items = db.relationship("Item", back_populates="owner")
     

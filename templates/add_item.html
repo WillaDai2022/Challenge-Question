@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Add{% endblock %}
+
+{% block body %}
+    <form id="package_info" action="/add_item" method="post">
+        <label for="name">Item Name</label>
+        <input type="text" name="item_name" id="name"><br>
+        <label for="type">Item Type</label>
+        <input type="text" name="item_type" id="type"><br>
+        <label for="quantity">Quantity</label>
+        <input type="text" name="item_quantity" id="quantity"><br>
+        <label for="o_name">Owner Name</label>
+        <input type="text" name="owner_name" id="o_name"><br>
+        <input type="submit">
+    </form>  
+{% endblock %}
