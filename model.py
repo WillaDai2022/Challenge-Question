@@ -10,8 +10,8 @@ class Item(db.Model):
     __tablename__ = "item"
 
     item_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    brand = db.Column(db.String(100), nullable=False)
-    series_id = db.Column(db.String(50), nullable=False)
+    item_type = db.Column(db.String(100), nullable=False)
+    item_name = db.Column(db.String(100), nullable=False)
     quantity = db.db.Column(db.Integer, default=0)
     owner_id = db.Column(db.Integer, db.ForeignKey("owner.owner_id"), nullable=False)
     
@@ -30,7 +30,7 @@ class Owner(db.Model):
     __tablename__ = "owner"
 
     owner_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
+    owner_name = db.Column(db.String(100), nullable=False)
     registered_number = db.Column(db.String(100), nullable=False)
     
     items = db.relationship("Item", back_populates="owner")
@@ -39,7 +39,7 @@ class Owner(db.Model):
     def __repr__(self):
         """Show owner id and name"""
 
-        return f"<owner_id: {self.owner_id} owner_name: {self.name}>"
+        return f"<owner_id: {self.owner_id} owner_name: {self.owner_name}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///my_inventory", echo=True):
