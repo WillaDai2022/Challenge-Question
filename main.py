@@ -1,6 +1,8 @@
 from flask import Flask, render_template,request,redirect,flash
+# from model import connect_to_db
 import crud
 app = Flask(__name__)
+
 
 @app.route("/")
 def homepage():
@@ -17,11 +19,12 @@ def add_item():
     """Add a new item"""
 
     item_name = request.form.get("item_name")
-    quantity = request.form.get("quantity")
+    quantity = int(request.form.get("item_quantity"))
     owner_name = request.form.get("owner_name")
 
-    print(item_name, quantity, owner_name)
     owner = crud.get_owner_by_name(owner_name)
+    print("##########################")
+    print("owner")
     if not owner:
         owner = crud.create_owner(owner_name)
 
@@ -31,12 +34,13 @@ def add_item():
     else:
         type = request.form.get("item_type")
         new_item = crud.create_item(type, item_name,quantity, owner)
-
         crud.db.session.add(new_item)
-        crud.db.session.commit()
-        flash("Added")
+        print("**************")
+
+    crud.db.session.commit()
+    flash("Added")
      
-    return redirect("/")
+    return redirect("/add_item")
 
     
 @app.route("/view_all_items")
@@ -47,4 +51,8 @@ def show_all_items():
         items = ["no"]
     return render_template("view_all_items.html")
 
-app.run(host='0.0.0.0', port=8080)
+
+if __name__ == "__main__":
+    # connect to database before app.run gets called. 
+    # If not, Flask won’t be able to access your database
+    app.run(host='0.0.0.0', port=8080)

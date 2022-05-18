@@ -2,11 +2,11 @@
 
 import os
 import model
-import server
+import main
 
 
 os.system("dropdb my_inventory")
 os.system("createdb my_inventory")
 
-model.connect_to_db(server.app)
+model.connect_to_db(main.app)
 model.db.create_all()

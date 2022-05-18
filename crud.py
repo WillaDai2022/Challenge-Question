@@ -24,10 +24,10 @@ def get_item_by_name(item_name):
 
     return Item.query.filter(Item.item_name==item_name).first()
 
-def create_owner(owner_name):
+def create_owner(name):
     """Create and return a new owner"""
     
-    new_owner = Owner(owner_name=owner_name)
+    new_owner = Owner(owner_name=name)
     return new_owner
     
 def get_owner_by_name(name):
@@ -36,7 +36,7 @@ def get_owner_by_name(name):
     return Owner.query.filter(Owner.owner_name==name).first()
 
 if __name__ == '__main__':
-    from server import app
+    from main import app
     connect_to_db(app)
 
 
